@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Diabetes Prediction Form</h2>
+        <form action="/" method="POST">
+            {% for feature in feature_names %}
+                <label>{{ feature }}:</label>
+                <input type="number" step="any" name="{{ feature }}" required><br>
+            {% endfor %}
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction is not none %}
+            <div class="result">
+                <h3>Prediction Result:</h3>
+                {% if prediction == 1 %}
+                    <p class="high-risk">DIABETES PRESENT (high risk)</p>
+                {% elif prediction == 0 %}
+                    <p class="low-risk">NO DIABETES (low risk)</p>
+                {% else %}
+                    <p class="error">{{ prediction }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
